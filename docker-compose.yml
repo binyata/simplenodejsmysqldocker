@@ -1,0 +1,20 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: node.api.dockerfile
+    ports:
+      - "5000:5000"
+    links:
+      - database 
+    environment:
+        - "DB_PORT=3306"
+        - "DB_HOST=database"   
+  database:
+    image: mysql:5.6
+    environment:
+        - "MYSQL_ROOT_PASSWORD=secret"
+        - "MYSQL_DATABASE=homestead"
+    ports:
+        - "33061:3306"  
